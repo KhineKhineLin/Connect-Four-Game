@@ -1,9 +1,14 @@
+import 'package:connect_four/controllers/game_controller.dart';
 import 'package:connect_four/screens/game_screen/widgets/board_column.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Board extends StatelessWidget {
-  const Board({ Key? key }) : super(key: key);
-
+  final GameController gameController=Get.find<GameController>();
+  List<BoardColumn>_buildBoard(){
+    return gameController.board.map((boardColumn) => BoardColumn(
+      columnOfPlayerChips: boardColumn,)).toList();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,15 +38,7 @@ class Board extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BoardColumn(),
-                  BoardColumn(),
-                  BoardColumn(),
-                  BoardColumn(),
-                  BoardColumn(),
-                  BoardColumn(),
-                  BoardColumn()
-                ],
+                children: _buildBoard()
               ),
             ],
           ),
