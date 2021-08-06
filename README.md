@@ -1,4 +1,4 @@
-# connect_four
+# connect_four game flutter
 
 A new Flutter project.
 
