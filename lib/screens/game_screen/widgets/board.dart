@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 class Board extends StatelessWidget {
   final GameController gameController=Get.find<GameController>();
   List<BoardColumn>_buildBoard(){
+    int currentColumnNumber=0;
     return gameController.board.map((boardColumn) => BoardColumn(
-      columnOfPlayerChips: boardColumn,)).toList();
+      columnOfPlayerChips: boardColumn,
+      columnNumber: currentColumnNumber++,)).toList();
   }
   @override
   Widget build(BuildContext context) {
@@ -37,8 +39,14 @@ class Board extends StatelessWidget {
             children: [
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: _buildBoard()
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GetBuilder<GameController>(
+                    builder: (GetxController gameController)=> Row(
+                      children: _buildBoard()
+                    ),
+                  )
+                ],
               ),
             ],
           ),
